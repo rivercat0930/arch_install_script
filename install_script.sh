@@ -44,7 +44,28 @@ fdisk -l
 echo ""
 echo "Please enter which disk you want to partition (ex: /dev/sda)"
 read DISK
-echo "Your choice: ${DISK}"
+
+(
+echo "g"
+
+echo "n"
+echo ""
+echo ""
+echo "+500M"
+echo "t"
+echo "1"
+
+echo "n"
+echo ""
+echo ""
+echo ""
+echo "t"
+echo "2"
+echo "23"
+
+echo "w"
+) | fdisk ${DISK}
+
 
 echo "==================="
 echo "make partition done"
