@@ -14,6 +14,11 @@ else
 fi
 
 # add mirror site
+echo ""
+echo "=============="
+echo "Add mirrorlist"
+echo "=============="
+
 head -n 10 /etc/pacman.d/mirrorlist > /etc/pacman.d/mirrorlist.new
 echo "## Taiwan
 Server = https://mirror.archlinux.tw/ArchLinux/$repo/os/$arch
@@ -25,7 +30,26 @@ tail -n 20 /etc/pacman.d/mirrorlist >> /etc/pacman.d/mirrorlist.new
 rm -rf /etc/pacman.d/mirrorlist
 mv /etc/pacman.d/mirrorlist.new /etc/pacman.d/mirrorlist
 
+echo "======================="
+echo "Add mirrorlist complete"
+echo "======================="
+
 # make partition
+echo ""
+echo "=============="
+echo "make partition"
+echo "=============="
+
+fdisk -l
+echo ""
+echo "Please enter which disk you want to partition (ex: /dev/sda)"
+read DISK
+echo "Your choice: ${DISK}"
+
+echo "==================="
+echo "make partition done"
+echo "==================="
+
 # formatting
 # mount
 # install arch linux and some software
