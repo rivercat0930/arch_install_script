@@ -79,8 +79,8 @@ echo "================"
 echo "start formatting"
 echo "================"
 
-mkfs.ext4 /dev/${DISK}2
-mkfs.fat -F 32 /dev/${DISK}1
+mkfs.ext4 ${DISK}2
+mkfs.fat -F 32 ${DISK}1
 
 echo "==========="
 echo "format done"
@@ -92,8 +92,8 @@ echo "==========="
 echo "start mount"
 echo "==========="
 
-mount /dev/${DISK}2 /mnt
-mount --mkdir /dev/${DISK}1 /mnt/boot
+mount ${DISK}2 /mnt
+mount --mkdir ${DISK}1 /mnt/boot
 
 echo "=========="
 echo "mount done"
