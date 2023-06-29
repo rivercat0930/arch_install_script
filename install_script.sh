@@ -74,8 +74,34 @@ echo "make partition done"
 echo "==================="
 
 # formatting
+echo ""
+echo "================"
+echo "start formatting"
+echo "================"
+
+mkfs.ext4 /dev/${DISK}2
+mkfs.fat -F 32 /dev/${DISK}1
+
+echo "==========="
+echo "format done"
+echo "==========="
+
 # mount
+echo ""
+echo "==========="
+echo "start mount"
+echo "==========="
+
+mount /dev/${DISK}2 /mnt
+mount --mkdir /dev/${DISK}1 /mnt/boot
+
+echo "=========="
+echo "mount done"
+echo "=========="
+
 # install arch linux and some software
+pacstrap -K /mnt base linux linux-firmware linux-headers neofetch man-db man-pages texinfo sudo nano networkmanager ntp tmux git pipewire-pulse dosfstools ntfs-3g grub efibootmgr ufw
+
 # spawn fstab
 
 # switch shell to setting something
