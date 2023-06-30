@@ -134,7 +134,8 @@ echo "LANG=en_US.UTF-8" > /etc/locale.conf
 echo "{$HOSTNAME}" > /etc/hostname
 
 # root password
-echo "$ROOT_PASSWD" | passwd 
+(echo "$ROOT_PASSWD"
+echo "$ROOT_PASSWD") | passwd 
 
 # boot loader
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch --removable --recheck
