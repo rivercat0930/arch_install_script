@@ -112,7 +112,7 @@ echo "mount done"
 echo "=========="
 
 # install arch linux and some software
-pacstrap -K /mnt base linux linux-firmware linux-headers neofetch man-db man-pages texinfo sudo nano networkmanager ntp tmux git pipewire-pulse dosfstools ntfs-3g grub efibootmgr ufw
+pacstrap -K /mnt base linux linux-firmware linux-headers neofetch man-db man-pages sudo nano networkmanager ntp tmux git pipewire-pulse nvidia nvidia-dkms nvidia-settings nvtop dosfstools ntfs-3g amd-ucode intel-ucode xf86-video-vesa xf86-video-ati xf86-video-intel xf86-video-amdgpu xf86-video-nouveau xf86-video-fbdev grub efibootmgr ufw xorg xorg-server sddm plasma-meta kde-accessibility-meta kde-games-meta kde-graphics-meta kde-multimedia-meta kde-network-meta kde-pim-meta kde-sdk-meta kde-system-meta kde-utilities-meta kdevelop-meta
 
 # generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab
