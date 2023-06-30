@@ -155,6 +155,9 @@ systemctl enable ufw
 ufw default allow outgoing
 ufw default deny incoming
 
+# enable sddm
+systemctl enable sddm
+
 exit
 " > /mnt/next.sh
 
@@ -168,5 +171,3 @@ umount -R /mnt
 echo "============================="
 echo "Everything is getting done!!!"
 echo "============================="
-
-reboot
