@@ -145,7 +145,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 useradd -m $USERNAME
 (echo "$PASSWORD"
 echo "$PASSWORD") | passwd $USERNAME
-sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
+sed -i '79i$USERNAME ALL=(ALL:ALL) ALL' /etc/sudoers
 
 # enable network manager
 systemctl enable NetworkManager
