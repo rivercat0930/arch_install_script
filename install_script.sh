@@ -148,9 +148,6 @@ echo "$PASSWORD") | passwd $USERNAME
 # enable network manager
 systemctl enable NetworkManager
 
-# time ntp
-systemctl enable ntp
-
 # enable ufw
 systemctl enable ufw
 ufw default allow outgoing
