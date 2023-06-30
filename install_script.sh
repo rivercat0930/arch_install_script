@@ -134,21 +134,23 @@ echo "LANG=en_US.UTF-8" > /etc/locale.conf
 echo "{$HOSTNAME}" > /etc/hostname
 
 # root password
-echo "{$ROOT_PASSWD}" > | passwd
+echo "$ROOT_PASSWD" | passwd 
 
 # boot loader
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch --removable --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # add user
-useradd -m {$USERNAME}
-echo "{$PASSWORD}" | passwd {$USERNAME}
-
-# time ntp
-timedatectl set-ntp true
+useradd -m $USERNAME
+(echo "$PASSWORD"
+echo "$PASSWORD") | passwd $USERNAME
 
 # enable network manager
 systemctl enable NetworkManager
+systemctl start NetworkManager
+
+# time ntp
+timedatectl set-ntp true
 
 # enable ufw
 systemctl enable ufw
