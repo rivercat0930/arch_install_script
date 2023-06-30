@@ -170,4 +170,4 @@ echo "============================="
 echo "Everything is getting done!!!"
 echo "============================="
 
-# reboot
+reboot
