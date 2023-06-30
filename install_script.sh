@@ -21,11 +21,11 @@ echo "=============="
 
 head -n 10 /etc/pacman.d/mirrorlist > /etc/pacman.d/mirrorlist.new
 echo "## Taiwan
-Server = https://free.nchc.org.tw/arch/$repo/os/$arch
+Server = https://free.nchc.org.tw/arch/\$repo/os/\$arch
 ## Taiwan
-Server = https://mirror.archlinux.tw/ArchLinux/$repo/os/$arch
+Server = https://mirror.archlinux.tw/ArchLinux/\$repo/os/\$arch
 ## Taiwan
-Server = https://archlinux.cs.nycu.edu.tw/$repo/os/$arch
+Server = https://archlinux.cs.nycu.edu.tw/\$repo/os/\$arch
 " >> /etc/pacman.d/mirrorlist.new
 
 tail -n 20 /etc/pacman.d/mirrorlist >> /etc/pacman.d/mirrorlist.new
