@@ -1,5 +1,22 @@
 #!/bin/sh
 
+fdisk -l
+echo ""
+echo "Please enter which disk you want to partition (ex: /dev/sda)"
+read DISK
+
+echo "Please enter root password: "
+read ROOT_PASSWD
+
+echo "Please enter hostname: "
+read HOSTNAME
+
+echo "Please enter username: "
+read USERNAME
+
+echo "Please enter user password: "
+read PASSWORD
+
 #check network connect status
 if ping google.com -c 4 ; then
     echo "=========================="
@@ -41,11 +58,6 @@ echo ""
 echo "=============="
 echo "make partition"
 echo "=============="
-
-fdisk -l
-echo ""
-echo "Please enter which disk you want to partition (ex: /dev/sda)"
-read DISK
 
 (
 echo "g"
@@ -102,10 +114,55 @@ echo "=========="
 # install arch linux and some software
 pacstrap -K /mnt base linux linux-firmware linux-headers neofetch man-db man-pages texinfo sudo nano networkmanager ntp tmux git pipewire-pulse dosfstools ntfs-3g grub efibootmgr ufw
 
-# spawn fstab
+# generate fstab
+genfstab -U /mnt >> /mnt/etc/fstab
+
+# generate shell script to next step installation
+echo "#!bin/sh
+
+# change timezone
+ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
+
+# localization
+sed -i 's/^#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
+sed -i 's/^#zh_TW.UTF-8 UTF-8/zh_TW.UTF-8 UTF-8/' /etc/locale.gen
+locale-gen
+
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
+
+# hostname
+echo "{$HOSTNAME}" > /etc/hostname
+
+# root password
+echo "{$ROOT_PASSWD}" > | passwd
+
+# boot loader
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch --removable --recheck
+grub-mkconfig -o /boot/grub/grub.cfg
+
+# add user
+useradd -m {$USERNAME}
+echo "{$PASSWORD}" | passwd {$USERNAME}
+
+# time ntp
+timedatectl set-ntp true
+
+# enable network manager
+systemctl enable NetworkManager
+
+# enable ufw
+systemctl enable ufw
+ufw default allow outgoing
+ufw default deny incoming
+
+exit
+" > /mnt/next.sh
 
 # switch shell to setting something
+arch-chroot /mnt sh next.sh
+
 # unmount
+umount -R /mnt
 
 # done
 echo "============================="
